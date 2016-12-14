@@ -124,7 +124,24 @@ export class MQEDatasource {
   }
 
   targetContainsTemplate(target) {
-    //TODO
+    for (let metric of target.metrics) {
+      if (this.templateSrv.variableExists(metric.metric)) {
+        return true;
+      }
+    }
+
+    for (let host of target.hosts) {
+      if (this.templateSrv.variableExists(host)) {
+        return true;
+      }
+    }
+
+    for (let app of target.apps) {
+      if (this.templateSrv.variableExists(app)) {
+        return true;
+      }
+    }
+
     return false;
   };
 
